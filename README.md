@@ -1,4 +1,4 @@
-# Dual-pathway-CNN-for-VS-segmentation
+# Lesion-delineation-framework-for-stereotactic-magnetic-resonance-images
  <h2> Software platform for data pre-processing</h2> 
  <p> Matlab 2019b+ </p>
  <p> matlab_script/Data_process.m: Main matlab script for pre-processing</p>
@@ -21,3 +21,5 @@
  <h2> Publication</h2>
  <p> https://www.sciencedirect.com/science/article/pii/S0933365719312722 </p>
  <p> https://www.nature.com/articles/s41598-021-82665-8 </p>
+ <p> https://www.sciencedirect.com/science/article/pii/S0169260722006927 </p>
+ <p> https://onlinelibrary.wiley.com/doi/full/10.1002/jmri.28950 </p>
