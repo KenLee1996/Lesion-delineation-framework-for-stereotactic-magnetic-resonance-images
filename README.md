@@ -2,7 +2,7 @@
  <h2> Docker enviroment </h2>
  <p> OS environment: Windows Subsystem for Linux (WSL) </p>
  <p> WSL OS: Ubuntu-22.04 </p>
- <p> nvidia-container-toolkit </p>
+ <p> Pre-requirement: nvidia-container-toolkit </p>
  
  <h2> Software platform for CNN training </h2>
  <p> python 3.11, tensorflow==2.14 </p>
