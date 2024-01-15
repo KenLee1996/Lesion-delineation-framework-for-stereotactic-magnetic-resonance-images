@@ -1,0 +1,4 @@
+cd (location of dockerfile)
+docker build -t tf214 .
+#test for installation
+docker run --gpus all --shm-size=20gb -p 8887:8888 -v /mnt/c/Users/user:/tf -v /mnt:/mnt -d tf214
