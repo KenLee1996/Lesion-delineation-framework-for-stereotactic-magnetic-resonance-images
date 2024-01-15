@@ -1,4 +1,0 @@
-cd (location of dockerfile)
-docker build -t torch .
-#test for installation
-docker run --gpus all --shm-size=20gb -p 8885:8888 -v /mnt/c/Users/user:/workspace -v /mnt:/mnt -d torch
