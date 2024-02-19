@@ -5,8 +5,8 @@
  <p> Pre-requirement: nvidia-container-toolkit </p>
  
  <h2> Software platform for CNN training </h2>
- <p> python 3.11, tensorflow==2.14 </p>
- <p> python 3.11, pytorch==2.1.1 </p>
+ <p> python 3.8, tensorflow==2.12 </p>
+ <p> python 3.11, pytorch==2.1.0 </p>
   
  <h2> Publication</h2>
  <p> https://www.sciencedirect.com/science/article/pii/S0933365719312722 </p>
