@@ -10,7 +10,7 @@
 
  <h2> Framework for federated model training </h2>
  <p> Flower: A Friendly Federated Learning Framework </p>
- <p> https://flower.ai/docs/framework/tutorial-series-get-started-with-flower-pytorch.html </p>
+ <p> https://flower.ai/docs/framework/index.html </p>
  <p> Nvidia Clara Train SDK for Medical Imaging </p>
  <p> https://catalog.ngc.nvidia.com/orgs/nvidia/containers/clara-train-sdk</p>
   
