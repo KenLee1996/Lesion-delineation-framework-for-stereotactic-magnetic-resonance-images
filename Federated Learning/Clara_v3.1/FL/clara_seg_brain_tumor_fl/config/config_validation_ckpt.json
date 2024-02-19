@@ -1,0 +1,60 @@
+{
+    "use_scanning_window": true,
+    "multi_gpu": false,
+    "batch_size": 1,
+    "DATA_LIST_KEY": "validation",
+    "inferer": {
+      "name": "TFScanWindowInferer",
+      "args": {
+        "roi_size": [192, 192, 64]
+      }
+    },
+  "model_loader": {
+        "name": "CheckpointLoader",
+        "args": {
+          "checkpoint_dir": "{MMAR_CKPT_DIR}"
+        }
+    },
+  "pre_transforms": [
+      {
+        "name": "MyNumpyLoader",
+        "path": "myNpLoaderVal0130.MyNumpyLoader",
+        "args": {
+          "fields": ["image", "label"],
+          "shape": "NDHWC"
+        }
+      }
+    ],
+     "image_pipeline": {
+      "name": "SegmentationImagePipeline",
+      "args": {
+        "data_list_file_path": "{DATASET_JSON}",
+        "data_file_base_dir": "{DATA_ROOT}",
+        "data_list_key": "validation",
+        "output_data_format": "channels_last",
+        "output_crop_size": [-1, -1, -1],
+        "output_batch_size": 1,
+        "batched_by_transforms": true
+      }
+    },
+    "inferer": {
+      "name": "TFScanWindowInferer",
+      "args": {
+        "roi_size": [
+          192,
+          192,
+          64
+        ],
+    "val_metrics":
+    [
+        {
+            "name": "ComputeAverageDice",
+            "args": {
+              "name": "mean_dice",
+              "field": "pred_class1",
+              "label_field": "label_class1",
+              "report_path": "{MMAR_EVAL_OUTPUT_PATH}"
+            }
+        }
+    ]
+}

@@ -1,0 +1,84 @@
+{
+  "version": "1.0",
+  "roles": {
+    "super": "super user of system",
+    "lead_researcher": "lead researcher of the study",
+    "site_researcher": "site researcher of the study",
+    "site_it": "site IT of the study",
+    "lead_it": "lead IT of the study"
+  },
+  "groups": {
+    "relaxed": {
+      "desc": "org group with relaxed policies",
+      "rules": {
+        "allow_byoc": true,
+        "allow_custom_datalist": true
+      }
+    },
+    "strict": {
+      "desc": "org group with strict policies",
+      "rules": {
+        "allow_byoc": false,
+        "allow_custom_datalist": false
+      }
+    },
+    "general": {
+      "desc": "general group user rights",
+      "role_rights": {
+        "super": {},
+        "lead_researcher": {
+          "train_all": true,
+          "view_all": true
+        },
+        "site_researcher": {
+          "train_self": true,
+          "view_self": true
+        },
+        "lead_it": {
+          "operate_all": true,
+          "view_all": true
+        },
+        "site_it": {
+          "operate_self": true,
+          "view_self": true
+        }
+      }
+    }
+  },
+  "users": {
+    "admin": {
+      "org": "nymu",
+      "roles": [
+        "super"
+      ]
+    }
+  },
+  "orgs": {
+    "ntuh": [
+      "relaxed",
+      "general"
+    ],
+    "tvgh": [
+      "relaxed",
+      "general"
+    ],
+    "tsgh": [
+      "relaxed",
+      "general"
+    ],
+    "twcc": [
+      "relaxed",
+      "general"
+    ],
+    "nymu": [
+      "relaxed",
+      "general"
+    ]
+  },
+  "sites": {
+    "server": "twcc",
+    "client_0": "ntuh",
+    "client_1": "tvgh",
+    "client_2": "tsgh"
+  }
+}

@@ -1,0 +1,33 @@
+cd /claraDevDay/FL
+mkdir /claraDevDay/FL/20210412
+mkdir /claraDevDay/FL/20210412/provisioning
+provision -p /claraDevDay/FL/provision.yml -o /claraDevDay/FL/20210412/provisioning -t /claraDevDay/FL/20210412/provisioning/audit.pkl -a /claraDevDay/FL/authz_config.json
+cd /claraDevDay/FL/20210412/provisioning
+unzip -oP bnB0Wa95P3UMKL4u server.zip -d ../server
+unzip -oP rVG3IdZeEsftbHMX client_0.zip -d ../client_0
+unzip -oP dPMF4Tb1cVRwNf5s client_1.zip -d ../client_1
+unzip -oP s3FW0kGCgzX9i0Id client_2.zip -d ../client_2
+unzip -oP ZqPo7OsE3bLDyhH0 admin.zip -d ../admin
+
+cd /claraDevDay/FL/20210412/server/startup
+./start.sh
+
+cd /claraDevDay/FL/20210412/client/startup
+./start.sh
+
+cd /claraDevDay/FL/20210412/admin/startup
+./fl_admin.sh
+check_status server
+check_status client
+set_run_number 1
+upload_folder ../../../clara_seg_brain_tumor_fl
+deploy clara_seg_brain_tumor_fl server
+deploy clara_seg_brain_tumor_fl client
+start server
+start client
+
+abort server
+abort client
+
+shutdown server
+shutdown client

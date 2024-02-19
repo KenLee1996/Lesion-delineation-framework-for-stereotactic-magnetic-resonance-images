@@ -1,0 +1,7 @@
+{
+    "DATA_ROOT": "/data/",
+    "DATASET_JSON": "/data/brain_tumor.json",
+    "PROCESSING_TASK": "segmentation",
+    "MMAR_EVAL_OUTPUT_PATH": "eval",
+    "MMAR_CKPT_DIR": "models"
+}

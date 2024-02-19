@@ -1,0 +1,39 @@
+# org is to describe each participant's organization
+# schema change: org is now mandatory
+
+# the name of this project
+name: 20210412_new
+
+server:
+  org: nymu
+
+  # set cn to the server's fully qualified domain name
+  cn: ymu045-017.ym.edu.tw
+
+  # replace the number with that all clients can reach out to, and that the server can open to listen to
+  fed_learn_port: 8002
+
+  # again, replace the number with that all clients can reach out to, and that the server can open to listen to
+  # the value must be different from fed_learn_port
+  admin_port: 8003
+
+  # admin_storage is the mmar upload folder name on the server
+  admin_storage: transfer
+
+  min_num_clients: 1
+  max_num_clients: 100
+
+
+fl_clients:
+  # client_name must be unique
+  - org: ntuh
+    client_name: client_0
+  - org: tvgh
+    client_name: client_1
+  - org: tsgh
+    client_name: client_2
+
+admin_clients:
+  # email is the user name for admin authentication.  Hence, it must be unique within the project
+  - org: twcc
+    email: admin
