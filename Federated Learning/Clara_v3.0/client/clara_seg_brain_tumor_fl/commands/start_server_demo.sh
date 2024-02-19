@@ -8,7 +8,7 @@ echo "MMAR_ROOT set to $MMAR_ROOT"
 export CUDA_VISIBLE_DEVICES=
 
 # Data list containing all data
-CONFIG_FILE=config/config_train_0826.json
+CONFIG_FILE=config/config_train_0130.json
 SERVER_FILE=config/config_fed_server.json
 ENVIRONMENT_FILE=config/environment.json
 

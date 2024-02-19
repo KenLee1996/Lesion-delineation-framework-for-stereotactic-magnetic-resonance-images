@@ -15,7 +15,7 @@ ENVIRONMENT_FILE=config/environment.json
 
 ########################################### check on arguments
 if [[ -z  $DATASET_JSON  ]] ;then
-   DATASET_JSON=$MMAR_ROOT/config/dataset_28GB_npy.json
+   DATASET_JSON=$MMAR_ROOT/config/brain_tumor.json
 fi
 if [[ -z  $GPU2USE  ]] ;then
    GPU2USE=0

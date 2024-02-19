@@ -1,0 +1,4 @@
+{
+    "PROCESSING_TASK": "segmentation",
+    "MMAR_CKPT_DIR": "models"
+}

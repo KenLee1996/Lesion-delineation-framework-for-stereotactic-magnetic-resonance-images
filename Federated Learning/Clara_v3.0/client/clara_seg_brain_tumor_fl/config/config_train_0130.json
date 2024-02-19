@@ -1,0 +1,89 @@
+{
+  "epochs": 1,
+  "num_training_epoch_per_valid": 1,
+  "learning_rate": 1e-3,
+  "multi_gpu": false,
+  "dynamic_input_shape": true,
+  "use_amp": false,
+  "train": {
+    "loss": {
+      "path": "myDiceLoss0911.MyClonedDiceLoss"
+    },
+    "optimizer": {
+      "name": "Adam"
+    },
+    "model": {
+      "path": "myNetworkArch0130.CustomNetwork",
+      "args": {
+        "num_classes": 1
+      }
+    },
+    "pre_transforms": [
+      {
+        "name": "MyNumpyLoader",
+        "path": "myNpLoader0130.MyNumpyLoader",
+        "args": {
+          "fields": ["image", "label"],
+          "shape": "NDHWC"
+        }
+      }
+    ],
+    "image_pipeline": {
+      "name": "SegmentationImagePipeline",
+      "args": {
+        "data_list_file_path": "{DATASET_JSON}",
+        "data_file_base_dir": "{DATA_ROOT}",
+        "data_list_key": "training", 
+        "output_data_format": "channels_last",
+        "output_crop_size": [-1, -1, -1],
+        "output_batch_size": 1,
+        "batched_by_transforms": true
+      }
+    }
+  },
+  "validate": {
+    "metrics": [
+      {
+        "name": "ComputeAverageDice",
+        "args": {
+          "name": "mean_dice",
+          "is_key_metric": true,
+          "field": "model",
+          "label_field": "label"
+        }
+      }
+    ],
+    "pre_transforms": [
+      {
+        "name": "MyNumpyLoader",
+        "path": "myNpLoaderVal0130.MyNumpyLoader",
+        "args": {
+          "fields": ["image", "label"],
+          "shape": "NDHWC"
+        }
+      }
+    ],
+     "image_pipeline": {
+      "name": "SegmentationImagePipeline",
+      "args": {
+        "data_list_file_path": "{DATASET_JSON}",
+        "data_file_base_dir": "{DATA_ROOT}",
+        "data_list_key": "validation",
+        "output_data_format": "channels_last",
+        "output_crop_size": [-1, -1, -1],
+        "output_batch_size": 1,
+        "batched_by_transforms": true
+      }
+    },
+    "inferer": {
+      "name": "TFScanWindowInferer",
+      "args": {
+        "roi_size": [
+          192,
+          192,
+          64
+        ]
+      }
+    }
+  }
+}

@@ -6,10 +6,10 @@ class MyClonedDiceLoss(Loss):
 
     def __init__(self,data_format='channels_first'):
         Loss.__init__(self)
-        self.data_format = data_format        
+        self.data_format = data_format
 
     def get_loss(self, predictions, targets, build_ctx=None):
-        return dice_loss(targets,predictions)
+        return dice_loss(targets, predictions)
 
 def dice_loss(targets, predictions):
     e = 1e-8

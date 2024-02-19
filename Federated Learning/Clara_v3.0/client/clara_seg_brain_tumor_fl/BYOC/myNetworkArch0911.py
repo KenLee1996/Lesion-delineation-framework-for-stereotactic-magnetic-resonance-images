@@ -1,13 +1,12 @@
 import tensorflow as tf
 from ai4med.components.models.model import Model
 import tensorflow.contrib.slim as slim
+
 from keras.layers import *
 from group_norm import GroupNormalization
 from keras.backend.tensorflow_backend import set_session
-#from switchnorm import SwitchNormalization
-import os
-os.environ['TF_ENABLE_AUTO_MIXED_PRECISION'] = '0'
-os.environ['TF_ENABLE_AUTO_MIXED_PRECISION_GRAPH_REWRITE'] = '0'
+from switchnorm import SwitchNormalization
+
 class CustomNetwork(Model):
 
     def __init__(self, num_classes,training=True,data_format='channels_last'):
@@ -45,6 +44,15 @@ class CustomNetwork(Model):
             #conv12 = SwitchNormalization(name='switch12')(conv12)
             conv12 = GroupNormalization(groups=8, axis=-1, name='GroupNorm12')(conv12)
 
+            conv11 = Conv3D(16,kernel_size=(3,3,1),strides=(1,1,1),padding='same',activation='relu',name='conv11r')(conv11)
+            #conv11 = SwitchNormalization(name='switch11r')(conv11)
+            conv11 = GroupNormalization(groups=8, axis=-1, name='GroupNorm11r')(conv11)
+            conv11 = Add()([conv11, conv01])
+            conv12 = Conv3D(16,kernel_size=(1,1,3),strides=(1,1,1),padding='same',activation='relu',name='conv12r')(conv12)
+            #conv12 = SwitchNormalization(name='switch12r')(conv12)
+            conv12 = GroupNormalization(groups=8, axis=-1, name='GroupNorm12r')(conv12)
+            conv12 = Add()([conv12, conv02])
+
             conv21 = MaxPooling3D(pool_size=(2,2,1),strides=(2,2,1),padding='same')(conv11)
             conv21 = Conv3D(32,kernel_size=(3,3,1),strides=(1,1,1),padding='same',activation='relu',name='conv21')(conv21)
             #conv21 = SwitchNormalization(name='switch21')(conv21)
@@ -60,6 +68,15 @@ class CustomNetwork(Model):
             conv32 = Conv3D(32,kernel_size=(1,1,3),strides=(1,1,1),padding='same',activation='relu',name='conv32')(conv22)
             #conv32 = SwitchNormalization(name='switch32')(conv32)
             conv32 = GroupNormalization(groups=8, axis=-1, name='GroupNorm32')(conv32)
+
+            conv31 = Conv3D(32,kernel_size=(3,3,1),strides=(1,1,1),padding='same',activation='relu',name='conv31r')(conv31)
+            #conv31 = SwitchNormalization(name='switch31r')(conv31)
+            conv31 = GroupNormalization(groups=8, axis=-1, name='GroupNorm31r')(conv31)
+            conv31 = Add()([conv31, conv21])
+            conv32 = Conv3D(32,kernel_size=(1,1,3),strides=(1,1,1),padding='same',activation='relu',name='conv32r')(conv32)
+            #conv32 = SwitchNormalization(name='switch32r')(conv32)
+            conv32 = GroupNormalization(groups=8, axis=-1, name='GroupNorm32r')(conv32)
+            conv32 = Add()([conv32, conv22])
 
             convc = concatenate([MaxPooling3D(pool_size=(2,2,1),strides=(2,2,1),padding='same')(conv31),MaxPooling3D(pool_size=(2,2,1),strides=(2,2,1),padding='same')(conv32)],axis=-1)
             convc = Conv3D(64,kernel_size=(3,3,3),strides=(1,1,1),padding='same',activation='relu',name='convc')(convc)

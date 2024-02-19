@@ -60,7 +60,7 @@ class MyNumpyReader(object):
         #print("---------- opening np file ",file_name)
         #print(rot_angle,flip_ratio)
         data = np.load(file_name, allow_pickle=True)['data'].astype(self._dtype)
-        #data = resize(data, (int(data.shape[0]/2), int(data.shape[1]/2), data.shape[2]))   
+        data = resize(data, (int(data.shape[0]/2), int(data.shape[1]/2), data.shape[2]))   
         block_size = 192
         block_size_z = 64
         if data.shape[2]>block_size_z:
